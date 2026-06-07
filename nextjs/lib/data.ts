@@ -1,0 +1,187 @@
+import type { Artwork, Exhibition, PressItem } from '@/types'
+
+const BASE = 'https://katherinehoustonart.com/wp-content/uploads'
+
+export const artworks: Artwork[] = [
+  {
+    slug: 'coastal-light-i',
+    title: 'Coastal Light I',
+    year: 2023,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '36" × 48"',
+    series: 'Coastal Series',
+    image: `${BASE}/2020/03/katherine-houston-studio.jpg`,
+    price: 4800,
+    available: true,
+    featured: true,
+    description: 'A luminous study of light on water at dusk. The reverse-painting technique creates a depth of color impossible to achieve on canvas.',
+  },
+  {
+    slug: 'city-at-dusk',
+    title: 'City at Dusk',
+    year: 2022,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '24" × 36"',
+    series: 'Urban Series',
+    image: `${BASE}/2020/03/Coastal-Light-web.jpg`,
+    price: 3200,
+    available: true,
+    featured: true,
+    description: 'Houston's skyline distilled to color and light — the moment the city transitions from amber to violet.',
+  },
+  {
+    slug: 'infinite-horizon',
+    title: 'Infinite Horizon',
+    year: 2023,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '48" × 60"',
+    series: 'Horizon Series',
+    image: `${BASE}/2020/03/katherine-houston-coastal-series.jpg`,
+    price: 7200,
+    available: false,
+    featured: true,
+    description: 'The horizon as a meditation on space and memory. Katherine's largest format to date.',
+  },
+  {
+    slug: 'tide-pool',
+    title: 'Tide Pool',
+    year: 2022,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '20" × 20"',
+    series: 'Coastal Series',
+    image: `${BASE}/2020/03/Coastal-Light-II-web.jpg`,
+    price: 2400,
+    available: true,
+    featured: false,
+  },
+  {
+    slug: 'amber-field',
+    title: 'Amber Field',
+    year: 2021,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '30" × 40"',
+    series: 'Landscape Series',
+    image: `${BASE}/2020/03/katherine-houston-amber-field.jpg`,
+    price: 3800,
+    available: false,
+    featured: false,
+  },
+  {
+    slug: 'deep-water',
+    title: 'Deep Water',
+    year: 2023,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '24" × 24"',
+    series: 'Coastal Series',
+    image: `${BASE}/2020/03/katherine-houston-deep-water.jpg`,
+    price: 2800,
+    available: true,
+    featured: false,
+  },
+  {
+    slug: 'first-light',
+    title: 'First Light',
+    year: 2020,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '18" × 24"',
+    series: 'Dawn Series',
+    image: `${BASE}/2020/03/katherine-houston-first-light.jpg`,
+    price: 2100,
+    available: true,
+    featured: false,
+  },
+  {
+    slug: 'cerulean-study',
+    title: 'Cerulean Study',
+    year: 2021,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '12" × 16"',
+    image: `${BASE}/2020/03/katherine-houston-cerulean.jpg`,
+    price: 1400,
+    available: true,
+    featured: false,
+  },
+  {
+    slug: 'mesa-red',
+    title: 'Mesa Red',
+    year: 2019,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '30" × 30"',
+    series: 'Southwest Series',
+    image: `${BASE}/2020/03/katherine-houston-mesa-red.jpg`,
+    price: 3200,
+    available: false,
+    featured: false,
+  },
+  {
+    slug: 'late-summer-storm',
+    title: 'Late Summer Storm',
+    year: 2022,
+    medium: 'Reverse acrylic on Plexiglas',
+    dimensions: '36" × 36"',
+    series: 'Weather Series',
+    image: `${BASE}/2020/03/katherine-houston-storm.jpg`,
+    price: 4200,
+    available: true,
+    featured: false,
+  },
+]
+
+export const availableArtworks = artworks.filter(a => a.available)
+export const featuredArtworks = artworks.filter(a => a.featured)
+
+export function getArtworkBySlug(slug: string): Artwork | undefined {
+  return artworks.find(a => a.slug === slug)
+}
+
+export const exhibitions: Exhibition[] = [
+  { id: 'e1', title: 'Luminous Boundaries', venue: 'Laura Rathe Fine Art', location: 'Houston, TX', year: 2024, month: 'March', type: 'solo' },
+  { id: 'e2', title: 'Texas Contemporaries', venue: 'The Russell Collection', location: 'Austin, TX', year: 2023, month: 'September', type: 'group' },
+  { id: 'e3', title: 'Light on Surface', venue: 'Jones & Terwilliger Galleries', location: 'Fort Worth, TX', year: 2023, month: 'April', type: 'solo' },
+  { id: 'e4', title: 'Abstract Texas', venue: 'Dallas Art Fair', location: 'Dallas, TX', year: 2023, month: 'April', type: 'group' },
+  { id: 'e5', title: 'Reverse Light', venue: 'Galerie Tara', location: 'Chicago, IL', year: 2022, month: 'November', type: 'solo' },
+  { id: 'e6', title: 'Contemporary American Abstraction', venue: 'National Art Club', location: 'Washington, D.C.', year: 2022, month: 'February', type: 'group' },
+  { id: 'e7', title: 'Glassell Alumni Exhibition', venue: 'Museum of Fine Arts Houston', location: 'Houston, TX', year: 2021, month: 'October', type: 'group' },
+  { id: 'e8', title: 'Form and Light', venue: 'Caldwell Gallery Hudson', location: 'Catskill, NY', year: 2021, month: 'July', type: 'group' },
+]
+
+export const pressItems: PressItem[] = [
+  {
+    id: 'p1',
+    publication: 'Texas Monthly',
+    headline: 'The Artist Who Paints Backwards',
+    excerpt: '"Houston has mastered a technique so counter-intuitive it sounds impossible: she paints the last thing you see first, building layers in reverse until the final surface becomes the viewing surface. The results are paintings of extraordinary luminosity — as if lit from within."',
+    year: 2023,
+  },
+  {
+    id: 'p2',
+    publication: 'Houston Chronicle',
+    headline: 'Katherine Houston\'s Light-Filled Plexiglas Works Come to Laura Rathe',
+    excerpt: '"Her paintings glow. There is no other word for it. Whether they hang on a white wall in a gallery or in a sun-drenched living room, Houston\'s Plexiglas works emanate light from within themselves."',
+    year: 2024,
+  },
+  {
+    id: 'p3',
+    publication: 'Modern Luxury Interiors',
+    headline: 'Collecting Katherine Houston: The Artist Redefining Depth',
+    excerpt: '"In collector circles, Houston\'s work has become quietly covetable — the Plexiglas medium makes her paintings uniquely site-responsive, shifting in character with the light conditions of each room."',
+    year: 2023,
+  },
+  {
+    id: 'p4',
+    publication: 'Southwest Art',
+    headline: 'Reverse Painting: Katherine Houston\'s Distinctive Vision',
+    excerpt: '"What Houston achieves through reverse painting on Plexiglas is a luminosity that traditional oil painting simply cannot replicate. Her Coastal Series in particular demonstrates the full potential of the medium."',
+    year: 2022,
+  },
+]
+
+export const cubeImages = [
+  { src: `${BASE}/2022/01/Cub-Series.jpg`, alt: 'The Cube Series' },
+  { src: `${BASE}/2022/01/cubes-in-situ.jpeg`, alt: 'Cubes Installed' },
+  { src: `${BASE}/2022/01/Cube-Series-III-2.jpg`, alt: 'Cube Series III' },
+  { src: `${BASE}/2022/01/Cubes-for-Dallas-Show-1.jpeg`, alt: 'Cubes, Dallas Show' },
+  { src: `${BASE}/2022/01/Cubes-in-profile-II.jpg`, alt: 'Cubes in Profile' },
+  { src: `${BASE}/2022/01/cube-image-for-website-4.jpeg`, alt: 'Cube Series IV' },
+  { src: `${BASE}/2022/01/Cube-Series-6.jpg`, alt: 'Cube Series VI' },
+]

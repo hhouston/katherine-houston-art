@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katherine Houston — Concept 2: Immersive Dark</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #0E0E0C;
+            --bg2: #161612;
+            --bg3: #1E1E18;
+            --white: #F0EDE8;
+            --gold: #C9A84C;
+            --gold-dim: rgba(201,168,76,0.5);
+            --gray: rgba(240,237,232,0.45);
+            --border: rgba(240,237,232,0.08);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 26px 64px;
+            background: linear-gradient(to bottom, rgba(14,14,12,0.97) 0%, transparent 100%);
+        }
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px; font-weight: 300;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--white); text-decoration: none;
+        }
+        .nav-logo em { font-style: italic; color: var(--gold); }
+        .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+        .nav-links a {
+            font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gray); text-decoration: none; font-weight: 300;
+            transition: color 0.25s;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-acquire {
+            padding: 10px 26px;
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            letter-spacing: 0.2em !important;
+            transition: all 0.3s !important;
+        }
+        .nav-acquire:hover { background: var(--gold); color: var(--bg) !important; }
+
+        /* Hero — full viewport dark with floating artwork panels */
+        .hero {
+            height: 100vh; min-height: 700px;
+            position: relative; overflow: hidden;
+            display: flex; align-items: center;
+            background: var(--bg);
+        }
+        .hero-bg-art {
+            position: absolute; inset: 0;
+            opacity: 0.18;
+            background:
+                radial-gradient(ellipse 55% 70% at 75% 50%, #C9A84C 0%, transparent 60%),
+                radial-gradient(ellipse 40% 50% at 20% 70%, #2e7bcf 0%, transparent 55%),
+                radial-gradient(ellipse 30% 40% at 85% 20%, #cc1a1a 0%, transparent 50%);
+        }
+        .hero-grid-line {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(240,237,232,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(240,237,232,0.025) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            padding: 0 64px; max-width: 700px;
+        }
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 12px;
+            font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 36px; font-weight: 400;
+        }
+        .hero-tag::before {
+            content: '';
+            display: block; width: 28px; height: 1px; background: var(--gold);
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(60px, 8vw, 120px);
+            font-weight: 300; line-height: 0.96;
+            letter-spacing: -0.02em; margin-bottom: 40px;
+        }
+        .hero-title em { display: block; font-style: italic; color: var(--gold); }
+        .hero-desc {
+            font-size: 13px; font-weight: 300; color: var(--gray);
+            line-height: 2; max-width: 440px; margin-bottom: 52px;
+        }
+        .hero-actions { display: flex; gap: 20px; align-items: center; }
+        .btn-gold {
+            display: inline-block; padding: 14px 40px;
+            background: var(--gold); color: var(--bg);
+            text-decoration: none; font-size: 10px;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            font-weight: 500; transition: opacity 0.2s;
+        }
+        .btn-gold:hover { opacity: 0.85; }
+        .btn-ghost {
+            display: inline-block; padding: 14px 40px;
+            border: 1px solid var(--border); color: var(--gray);
+            text-decoration: none; font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase; font-weight: 300;
+            transition: all 0.3s;
+        }
+        .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+
+        /* Floating artwork panels */
+        .hero-panels {
+            position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+        }
+        .panel {
+            position: relative; overflow: hidden;
+        }
+        .panel-art {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.8s ease;
+        }
+        .panel:hover .panel-art { transform: scale(1.06); }
+        .panel-label {
+            position: absolute; bottom: 16px; left: 16px;
+            font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+            color: rgba(240,237,232,0.5);
+            font-weight: 300;
+        }
+        .p1 { background: linear-gradient(145deg,#0c2340,#1a4a8a,#2e7bcf,#7bb8e8); }
+        .p2 { background: linear-gradient(155deg,#3d2200,#8b5500,#d4840a,#f0b52a); }
+        .p3 { background: linear-gradient(140deg,#3d0000,#8b0000,#cc1a1a,#e85050); }
+        .p4 { background: linear-gradient(150deg,#1a0033,#4a0080,#8b2fc9,#c47ef5); }
+
+        /* Scroll hint */
+        .hero-scroll {
+            position: absolute; bottom: 40px; left: 64px;
+            display: flex; align-items: center; gap: 16px;
+            font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gray);
+        }
+        .scroll-dot {
+            width: 6px; height: 6px;
+            background: var(--gold); border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        /* Stat bar */
+        .stat-bar {
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 40px 64px;
+            display: grid; grid-template-columns: repeat(4,1fr);
+            gap: 1px;
+        }
+        .stat-item {
+            padding: 0 40px;
+            border-right: 1px solid var(--border);
+        }
+        .stat-item:first-child { padding-left: 0; }
+        .stat-item:last-child { border-right: none; }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px; font-weight: 300;
+            color: var(--gold); line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 9.5px; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--gray);
+        }
+
+        /* Section base */
+        section { padding: 110px 64px; }
+        .s-tag {
+            display: flex; align-items: center; gap: 16px;
+            font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 24px; font-weight: 400;
+        }
+        .s-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+        .s-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(34px, 3.5vw, 54px);
+            font-weight: 300; line-height: 1.12; margin-bottom: 24px;
+        }
+
+        /* Collection */
+        .collection-section { background: var(--bg); }
+        .collection-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 48px;
+        }
+        .view-link {
+            font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--gold); text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            transition: gap 0.2s;
+        }
+        .view-link:hover { gap: 14px; }
+        .view-link::after { content: '→'; }
+
+        .collection-masonry {
+            display: grid;
+            grid-template-columns: 3fr 2fr 2fr;
+            grid-template-rows: auto auto;
+            gap: 3px;
+        }
+        .col-item {
+            position: relative; overflow: hidden; cursor: pointer;
+            background: var(--bg3);
+        }
+        .col-item:nth-child(1) { grid-row: span 2; }
+        .col-art {
+            width: 100%; height: 100%; min-height: 240px;
+            object-fit: cover; display: block;
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .col-item:nth-child(1) .col-art { min-height: 520px; }
+        .col-item:hover .col-art { transform: scale(1.06); }
+        .col-info {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 32px 24px 24px;
+            background: linear-gradient(to top, rgba(14,14,12,0.88) 0%, transparent 100%);
+            opacity: 1;
+        }
+        .col-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px; font-weight: 300; font-style: italic;
+            margin-bottom: 6px;
+        }
+        .col-med { font-size: 10.5px; color: var(--gray); letter-spacing: 0.06em; }
+        .col-avail {
+            display: inline-block; margin-top: 12px;
+            padding: 6px 14px; border: 1px solid var(--gold);
+            font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--gold); font-weight: 300;
+        }
+
+        /* Art fills */
+        .a-blue  { background: linear-gradient(145deg,#081828,#0e3060,#1a5aaa,#3a8fd8,#7abbec); }
+        .a-gold  { background: linear-gradient(155deg,#280f00,#6b3200,#c06000,#e89820,#f5c84a); }
+        .a-bay   { background: linear-gradient(135deg,#081420,#0e2c42,#1c5070,#2e84a8,#7abccc); }
+        .a-world { background: linear-gradient(160deg,#081808,#0e3820,#1e6840,#2ea870,#80d0a0); }
+        .a-red   { background: linear-gradient(140deg,#200000,#5a0000,#aa1010,#d84040,#f09090); }
+        .a-purp  { background: linear-gradient(150deg,#100020,#300060,#6818b0,#a050e8,#d098f8); }
+
+        /* Artist section */
+        .artist-section {
+            background: var(--bg2);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+        }
+        .artist-image {
+            position: relative; min-height: 600px;
+            background: url('https://katherinehoustonart.com/wp-content/uploads/2020/03/katherine-houston-studio.jpg') center/cover no-repeat;
+            overflow: hidden;
+        }
+        .artist-image-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201,168,76,0.12) 0%, transparent 70%);
+        }
+        .artist-caption {
+            position: absolute; bottom: 28px; right: 28px;
+            font-size: 9.5px; color: rgba(240,237,232,0.3);
+            letter-spacing: 0.12em; text-transform: uppercase;
+        }
+        .artist-text {
+            padding: 80px 72px; display: flex; flex-direction: column; justify-content: center;
+        }
+        .artist-text p {
+            font-size: 14.5px; font-weight: 300; color: var(--gray);
+            line-height: 2; margin-bottom: 22px;
+        }
+        .artist-text em { color: var(--white); font-style: normal; }
+        .artist-creds {
+            margin-top: 44px; padding-top: 40px;
+            border-top: 1px solid var(--border);
+            display: grid; gap: 16px;
+        }
+        .ac-row { display: flex; gap: 20px; align-items: baseline; }
+        .ac-key {
+            font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--gold); min-width: 100px; font-weight: 400;
+        }
+        .ac-val { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+        /* Galleries strip */
+        .galleries-strip {
+            background: var(--bg3);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 32px 64px;
+            display: flex; align-items: center; gap: 48px;
+        }
+        .gs-label {
+            font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--gray); white-space: nowrap; flex-shrink: 0;
+        }
+        .gs-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+        .gs-list { display: flex; gap: 40px; flex-wrap: wrap; }
+        .gs-gallery {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px; font-weight: 300; font-style: italic;
+            color: rgba(240,237,232,0.65);
+            transition: color 0.2s;
+        }
+        .gs-gallery:hover { color: var(--gold); }
+
+        /* Process / Video */
+        .process-section { background: var(--bg); }
+        .process-inner { max-width: 900px; margin: 0 auto; }
+        .process-layout {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+            margin-top: 64px;
+        }
+        .process-video {
+            position: relative; padding-bottom: 56.25%;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+        }
+        .process-video-inner {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 20px;
+        }
+        .play-ring {
+            width: 68px; height: 68px;
+            border: 1.5px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .play-ring:hover { background: rgba(201,168,76,0.1); transform: scale(1.06); }
+        .play-tri {
+            width: 0; height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 20px solid var(--gold);
+            margin-left: 5px;
+        }
+        .play-label {
+            font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: var(--gray); font-weight: 300;
+        }
+        .process-text p {
+            font-size: 14.5px; font-weight: 300; color: var(--gray);
+            line-height: 2; margin-bottom: 20px;
+        }
+        .process-text em { color: var(--gold); font-style: italic; }
+        .process-steps {
+            margin-top: 36px; display: grid; gap: 24px;
+        }
+        .step { display: flex; gap: 20px; align-items: flex-start; }
+        .step-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px; font-weight: 300; color: var(--gold);
+            line-height: 1; min-width: 32px;
+        }
+        .step-text { padding-top: 8px; }
+        .step-title {
+            font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--white); margin-bottom: 4px; font-weight: 400;
+        }
+        .step-desc { font-size: 13px; color: var(--gray); line-height: 1.75; }
+
+        /* Acquire CTA */
+        .acquire-section {
+            background: linear-gradient(135deg, var(--bg2) 0%, #1a160e 50%, #221a08 100%);
+            text-align: center; padding: 120px 64px;
+            position: relative; overflow: hidden;
+        }
+        .acquire-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+        }
+        .acquire-section .s-tag { justify-content: center; }
+        .acquire-section .s-title { color: var(--white); max-width: 600px; margin: 0 auto 20px; }
+        .acquire-section p {
+            font-size: 14px; color: var(--gray); line-height: 1.9;
+            max-width: 480px; margin: 0 auto 52px; font-weight: 300;
+        }
+        .acquire-btns { display: flex; gap: 20px; justify-content: center; position: relative; }
+
+        /* Footer */
+        footer {
+            background: #080806; color: var(--white);
+            padding: 72px 64px 0;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px; border-top: 1px solid var(--border);
+        }
+        .f-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px; font-weight: 300; letter-spacing: 0.08em;
+            margin-bottom: 16px; color: var(--white);
+        }
+        .f-brand em { color: var(--gold); font-style: italic; }
+        .f-sub { font-size: 12.5px; color: var(--gray); line-height: 1.9; font-weight: 300; }
+        .f-h { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+        .f-list { list-style: none; }
+        .f-list li { margin-bottom: 11px; }
+        .f-list a {
+            color: var(--gray); text-decoration: none; font-size: 13px; font-weight: 300;
+            transition: color 0.2s;
+        }
+        .f-list a:hover { color: var(--white); }
+        .f-bar {
+            background: #080806; padding: 24px 64px;
+            border-top: 1px solid var(--border); margin-top: 60px;
+            display: flex; justify-content: space-between;
+            font-size: 11px; color: rgba(240,237,232,0.2); font-weight: 300;
+        }
+
+        /* Concept badge */
+        .concept-badge {
+            position: fixed; top: 80px; right: 0; z-index: 200;
+            background: var(--gold); color: #0E0E0C;
+            padding: 10px 20px 10px 16px;
+            font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif; font-weight: 500;
+        }
+        /* Archive */
+        .archive-wrap { margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--border); }
+        .archive-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px; }
+        .archive-label { font-size: 9.5px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+        .archive-heading { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; font-style: italic; color: rgba(240,237,232,0.4); }
+        .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+        .archive-img-wrap { overflow: hidden; }
+        .archive-img-wrap img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: saturate(0.6) brightness(0.8); transition: transform 0.5s ease, filter 0.3s; }
+        .archive-item:hover .archive-img-wrap img { transform: scale(1.04); filter: saturate(1) brightness(1); }
+        .archive-title-text { display: block; font-size: 11px; color: rgba(240,237,232,0.35); margin-top: 10px; padding: 0 2px 12px; font-style: italic; letter-spacing: 0.03em; }
+        .cube-section { background: linear-gradient(135deg,#16140a 0%,#1e1c0e 50%,#22200c 100%); padding: 96px 0 80px; border-top: 1px solid var(--border); }
+        .cube-s-intro { max-width: 600px; margin: 0 auto 52px; padding: 0 64px; text-align: center; }
+        .cube-s-badge { display: inline-block; padding: 6px 16px; background: var(--gold); color: var(--bg); font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; margin-bottom: 20px; }
+        .cube-s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px,3.5vw,54px); font-weight: 300; color: var(--white); line-height: 1.12; margin-bottom: 20px; }
+        .cube-s-text { font-size: 14px; color: var(--gray); line-height: 2; margin-bottom: 44px; font-weight: 300; }
+        .cube-s-scroll { display: flex; gap: 4px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .cube-s-scroll::-webkit-scrollbar { display: none; }
+        .cube-s-scroll img { height: 280px; width: auto; flex-shrink: 0; object-fit: cover; scroll-snap-align: start; }
+        .cube-s-meta { margin-top: 20px; font-size: 10.5px; color: rgba(240,237,232,0.25); letter-spacing: 0.12em; text-align: center; padding: 0 64px; }
+
+        @media (max-width: 768px) {
+          nav { padding: 18px 24px; }
+          .nav-links { display: none; }
+          section { padding: 64px 24px; }
+          .hero-content { padding: 0 24px; max-width: 100%; }
+          .hero-title { font-size: clamp(44px,12vw,72px); }
+          .hero-desc { max-width: 100%; }
+          .hero-actions { flex-direction: column; gap: 12px; }
+          .btn-gold, .btn-ghost { width: 100%; text-align: center; }
+          .hero-panels { display: none; }
+          .hero-scroll { left: 24px; }
+          .stat-bar { grid-template-columns: 1fr 1fr; padding: 28px 24px; gap: 0; }
+          .stat-item { padding: 16px 20px; border-right: none; border-bottom: 1px solid var(--border); }
+          .stat-item:last-child, .stat-item:nth-last-child(2) { border-bottom: none; }
+          .collection-header { flex-direction: column; gap: 14px; align-items: flex-start; }
+          .collection-masonry { grid-template-columns: 1fr; }
+          .col-item:nth-child(1) { grid-row: span 1; }
+          .col-item:nth-child(1) .col-art { min-height: 300px; }
+          .col-art { min-height: 200px; }
+          .artist-section { grid-template-columns: 1fr; }
+          .artist-image { min-height: 300px; }
+          .artist-text { padding: 44px 24px; }
+          .galleries-strip { flex-direction: column; gap: 20px; padding: 28px 24px; }
+          .gs-divider { display: none; }
+          .process-layout { grid-template-columns: 1fr; gap: 48px; }
+          .acquire-section { padding: 72px 24px; }
+          .acquire-btns { flex-direction: column; align-items: center; gap: 14px; }
+          footer { grid-template-columns: 1fr; gap: 36px; padding: 48px 24px 0; }
+          .f-bar { flex-direction: column; gap: 8px; text-align: center; padding: 18px 24px; }
+          .archive-grid { grid-template-columns: repeat(2,1fr); }
+          .cube-section { padding: 60px 0 52px; }
+          .cube-s-intro { padding: 0 24px; margin-bottom: 32px; }
+          .cube-s-scroll img { height: 200px; }
+          .cube-s-meta { padding: 0 24px; }
+          .cube-s-intro a { letter-spacing: 0.09em; padding: 12px 24px; font-size: 9.5px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="concept-badge">Concept 2 · Immersive Dark</div>
+
+<!-- Navigation -->
+<nav>
+    <a href="#" class="nav-logo">Katherine <em>Houston</em></a>
+    <ul class="nav-links">
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#artist">The Artist</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#">Exhibitions</a></li>
+        <li><a href="#acquire" class="nav-acquire">Acquire</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-bg-art"></div>
+    <div class="hero-grid-line"></div>
+    <div class="hero-content">
+        <div class="hero-tag">Abstract Painter · Houston, Texas</div>
+        <h1 class="hero-title">
+            Katherine<br>
+            <em>Houston</em>
+        </h1>
+        <p class="hero-desc">Working in reverse. Painting the back of Plexiglas with acrylic, building luminous abstract worlds that glow from within — a technique singular to her practice.</p>
+        <div class="hero-actions">
+            <a href="#collection" class="btn-gold">View Collection</a>
+            <a href="#acquire" class="btn-ghost">Acquire a Work</a>
+        </div>
+    </div>
+    <div class="hero-panels">
+        <div class="panel"><img class="panel-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/All-That-is-Blue-400x284.jpg" alt="All That Is Blue"><span class="panel-label">All That Is Blue</span></div>
+        <div class="panel"><img class="panel-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/02/A-Touch-of-Gold-400x284.jpg" alt="A Touch of Gold"><span class="panel-label">A Touch of Gold</span></div>
+        <div class="panel"><img class="panel-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/The-Spirit-of-Red-400x284.jpg" alt="The Spirit of Red"><span class="panel-label">The Spirit of Red</span></div>
+        <div class="panel"><img class="panel-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/02/When-The-Sun-Comes-400x284.jpg" alt="When The Sun Comes"><span class="panel-label">When The Sun Comes</span></div>
+    </div>
+    <div class="hero-scroll">
+        <div class="scroll-dot"></div>
+        <span>Explore</span>
+    </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stat-bar">
+    <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years of Practice</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Gallery Representations</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Cities Exhibited</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Singular Technique</div>
+    </div>
+</div>
+
+<!-- Gallery Strip -->
+<div class="galleries-strip">
+    <span class="gs-label">Represented by</span>
+    <div class="gs-divider"></div>
+    <div class="gs-list">
+        <span class="gs-gallery">Laura Rathe Fine Art</span>
+        <span class="gs-gallery">The Russell Collection</span>
+        <span class="gs-gallery">Jones &amp; Terwilliger</span>
+        <span class="gs-gallery">Corporate &amp; Private Collections Worldwide</span>
+    </div>
+</div>
+
+<!-- Collection -->
+<section class="collection-section" id="collection">
+    <div class="collection-header">
+        <div>
+            <div class="s-tag">Portfolio</div>
+            <h2 class="s-title">The Collection</h2>
+        </div>
+        <a href="#" class="view-link">View All Works</a>
+    </div>
+    <div class="collection-masonry">
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/All-That-is-Blue-400x284.jpg" alt="All That Is Blue">
+            <div class="col-info">
+                <div class="col-title">All That Is Blue</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Amber-Glow-400x284.jpg" alt="Amber Glow">
+            <div class="col-info">
+                <div class="col-title">Amber Glow</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/At-The-Bay-1-400x284.jpg" alt="At The Bay">
+            <div class="col-info">
+                <div class="col-title">At The Bay</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Ocean-Song-400x284.jpg" alt="Ocean Song">
+            <div class="col-info">
+                <div class="col-title">Ocean Song</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/The-Spirit-of-Red-400x284.jpg" alt="The Spirit of Red">
+            <div class="col-info">
+                <div class="col-title">The Spirit of Red</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+        <div class="col-item">
+            <img class="col-art" src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Aurora-Lights-400x284.jpg" alt="Aurora Lights">
+            <div class="col-info">
+                <div class="col-title">Aurora Lights</div>
+                <div class="col-med">Acrylic reverse painting on Plexiglas</div>
+                <span class="col-avail">Available · Inquire</span>
+            </div>
+        </div>
+    </div>
+    <div class="archive-wrap">
+        <div class="archive-header">
+            <span class="archive-label">Archive</span>
+            <span class="archive-heading">Earlier Works</span>
+        </div>
+        <div class="archive-grid">
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Serene-400x284.jpg" alt="Serene"></div><span class="archive-title-text">Serene</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Crystallized-400x284.jpg" alt="Crystallized"></div><span class="archive-title-text">Crystallized</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Dreaming-in-Color-400x284.jpg" alt="Dreaming in Color"></div><span class="archive-title-text">Dreaming in Color</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Ocean-Song-400x284.jpg" alt="Ocean Song"></div><span class="archive-title-text">Ocean Song</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Mystical-Moonlight-400x284.jpg" alt="Mystical Moonlight"></div><span class="archive-title-text">Mystical Moonlight</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Haze-400x284.jpeg" alt="Haze"></div><span class="archive-title-text">Haze</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Changing-Light-400x284.jpg" alt="Changing Light"></div><span class="archive-title-text">Changing Light</span></div>
+            <div class="archive-item"><div class="archive-img-wrap"><img src="https://katherinehoustonart.com/wp-content/uploads/2020/03/Blue-Lustre-400x284.jpg" alt="Blue Lustre"></div><span class="archive-title-text">Blue Lustre</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- Cube Series -->
+<section class="cube-section" id="cube-series">
+    <div class="cube-s-intro">
+        <span class="cube-s-badge">★ Best Seller</span>
+        <h2 class="cube-s-title">The Cube Series</h2>
+        <p class="cube-s-text">Her most sought-after work. Three-dimensional acrylic sculptures that bring the same luminous reverse-painting technique into physical form — each Cube a one-of-a-kind collectible object that transforms any interior.</p>
+        <a href="#" class="btn-gold">Inquire About the Cube Series</a>
+    </div>
+    <div class="cube-s-scroll">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cub-Series.jpg" alt="The Cube Series">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/cubes-in-situ.jpeg" alt="Cubes Installed">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cube-Series-III-2.jpg" alt="Cube Series III">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-for-Dallas-Show-1.jpeg" alt="Cubes, Dallas Show">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-in-profile-II.jpg" alt="Cubes in Profile">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/cube-image-for-website-4.jpeg" alt="Cube Series IV">
+        <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cube-Series-6.jpg" alt="Cube Series 6">
+    </div>
+    <p class="cube-s-meta">Available by inquiry · Limited availability</p>
+</section>
+
+<!-- Artist -->
+<section class="artist-section" id="artist" style="padding: 0;">
+    <div class="artist-image">
+        <div class="artist-image-glow"></div>
+        <span class="artist-caption">Houston, Texas · Studio Portrait</span>
+    </div>
+    <div class="artist-text">
+        <div class="s-tag">The Artist</div>
+        <h2 class="s-title">Katherine Houston</h2>
+        <p>A Houston native whose practice spans over two decades, Katherine Houston works in a medium uniquely her own. She <em>paints in reverse</em> — applying acrylic to the back of clear Plexiglas, building luminous abstract worlds where each brushstroke is a commitment, unalterable.</p>
+        <p>Her work explores what she calls <em>"the surprising outcome of letting go"</em> — compositions that begin with color and expand into landscape, cityscape, and pure abstraction, all seen through a surface that seems to generate its own light.</p>
+        <div class="artist-creds">
+            <div class="ac-row">
+                <span class="ac-key">Education</span>
+                <span class="ac-val">Glassell School of Art · Univ. of Houston · Hudson River Valley</span>
+            </div>
+            <div class="ac-row">
+                <span class="ac-key">Galleries</span>
+                <span class="ac-val">Laura Rathe Fine Art · The Russell Collection · Jones &amp; Terwilliger</span>
+            </div>
+            <div class="ac-row">
+                <span class="ac-key">Exhibited</span>
+                <span class="ac-val">Houston · Dallas · Austin · Chicago · Washington DC · California</span>
+            </div>
+            <div class="ac-row">
+                <span class="ac-key">Collections</span>
+                <span class="ac-val">Private &amp; corporate collectors, US and internationally</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process -->
+<section class="process-section" id="process">
+    <div class="process-inner">
+        <div class="s-tag">The Process</div>
+        <h2 class="s-title">Painting in Reverse</h2>
+        <div class="process-layout">
+            <div class="process-video">
+                <div class="process-video-inner">
+                    <div class="play-ring"><div class="play-tri"></div></div>
+                    <span class="play-label">Studio Process Film</span>
+                </div>
+            </div>
+            <div class="process-text">
+                <p>What makes a Houston painting immediately recognizable is a depth impossible to achieve on canvas. She works on the back of transparent Plexiglas — the painting builds in <em>reverse order</em>.</p>
+                <p>The first mark made is the last thing visible. No corrections. Pure intention at every stroke.</p>
+                <div class="process-steps">
+                    <div class="step">
+                        <span class="step-num">1</span>
+                        <div class="step-text">
+                            <div class="step-title">Color Concept</div>
+                            <div class="step-desc">Every work begins with a color palette — intuited from city, coast, or landscape.</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">2</span>
+                        <div class="step-text">
+                            <div class="step-title">Reverse Application</div>
+                            <div class="step-desc">Acrylic is applied to the back of Plexiglas. Foreground details painted first; background last.</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="step-num">3</span>
+                        <div class="step-text">
+                            <div class="step-title">Inner Luminosity</div>
+                            <div class="step-desc">Light passes through the Plexiglas and refracts through layers — creating the signature glow.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Acquire CTA -->
+<section class="acquire-section" id="acquire">
+    <div class="acquire-glow"></div>
+    <div class="s-tag">Collect</div>
+    <h2 class="s-title">Acquire an Original Work</h2>
+    <p>Original paintings, the Cube Series, and commission inquiries. Every piece ships with a certificate of authenticity and full provenance documentation.</p>
+    <div class="acquire-btns">
+        <a href="#" class="btn-gold">Browse Available Works</a>
+        <a href="#" class="btn-ghost">Commission Inquiry</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div>
+        <div class="f-brand">Katherine <em>Houston</em></div>
+        <p class="f-sub">Abstract painter · Houston, Texas<br>Reverse acrylic on Plexiglas<br><br>Represented at leading galleries<br>across the United States.</p>
+    </div>
+    <div>
+        <p class="f-h">Collection</p>
+        <ul class="f-list">
+            <li><a href="#">Works</a></li>
+            <li><a href="#">Cube Series</a></li>
+            <li><a href="#">Installed Works</a></li>
+            <li><a href="#">Corporate Clients</a></li>
+        </ul>
+    </div>
+    <div>
+        <p class="f-h">Artist</p>
+        <ul class="f-list">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Process</a></li>
+            <li><a href="#">Exhibitions</a></li>
+            <li><a href="#">Press</a></li>
+        </ul>
+    </div>
+    <div>
+        <p class="f-h">Connect</p>
+        <ul class="f-list">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Pinterest</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <p class="f-sub" style="margin-top: 20px;">713-703-8274</p>
+    </div>
+</footer>
+<div class="f-bar">
+    <span>© 2026 Katherine Houston. All rights reserved.</span>
+    <span>hhouston / katherine-houston-art</span>
+</div>
+
+
+</body>
+</html>

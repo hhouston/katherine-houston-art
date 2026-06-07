@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1749300000-seed01",
+    "createdAt": "2026-06-05T14:23:00.000Z",
+    "name": "Margaret Chen",
+    "email": "mchen@email.com",
+    "phone": "+1 (713) 555-0142",
+    "interest": "single",
+    "message": "I'm interested in acquiring one of the Cube Series works for our living room. We have a modern interior with high ceilings and concrete floors — the cubes look like they would be perfect. Can you share what is currently available and pricing?",
+    "artworkSlug": null,
+    "status": "new",
+    "adminNotes": "",
+    "replies": []
+  },
+  {
+    "id": "1749200000-seed02",
+    "createdAt": "2026-06-03T09:15:00.000Z",
+    "name": "David Reinholt",
+    "email": "dreinhold@interiorco.com",
+    "phone": null,
+    "interest": "corporate",
+    "message": "We are specifying art for a hotel lobby project in Austin. Looking for 3-4 large format works and potentially some cubes for the bar area. Budget is flexible for the right work. Can Katherine do a studio visit or at least a video call?",
+    "artworkSlug": null,
+    "status": "replied",
+    "adminNotes": "High value lead — follow up for site visit",
+    "replies": [
+      {
+        "id": "1749210000-r1",
+        "sentAt": "2026-06-03T16:45:00.000Z",
+        "body": "Dear David, thank you so much for reaching out about your Austin project. Katherine would love to discuss the hotel commission. She is available for a studio visit the week of June 16. Please let me know what works for your schedule and I'll coordinate."
+      }
+    ]
+  },
+  {
+    "id": "1749100000-seed03",
+    "createdAt": "2026-06-01T11:00:00.000Z",
+    "name": "Sarah & Tom Whitfield",
+    "email": "swhitfield@gmail.com",
+    "phone": null,
+    "interest": "gift",
+    "message": "We are buying a housewarming gift for close friends. They have a beach house in Galveston and we think one of Katherine's coastal pieces would be perfect. Budget is around $3,000–$4,500. What would you recommend?",
+    "artworkSlug": "coastal-light-i",
+    "status": "closed",
+    "adminNotes": "Sold Coastal Light I — happy customers",
+    "replies": [
+      {
+        "id": "1749110000-r1",
+        "sentAt": "2026-06-01T15:30:00.000Z",
+        "body": "Hello Sarah and Tom! What a thoughtful gift. For a beach house in Galveston, I'd strongly recommend 'Coastal Light I' — it's 36×48 and captures that Gulf Coast dusk light perfectly. It's $4,800 and available now. I can have it shipped with museum-quality packaging. Let me know if you'd like to move forward!"
+      }
+    ]
+  }
+]

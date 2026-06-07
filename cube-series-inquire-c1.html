@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Cube Series — Inquire · Katherine Houston</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --white: #FAFAF8;
+            --black: #0D0D0C;
+            --warm-gold: #8B7355;
+            --light-tan: #EAE6DE;
+            --mid-gray: #6B6560;
+            --border: rgba(0,0,0,0.08);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); font-size: 15px; line-height: 1.7; }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 60px;
+            background: rgba(250,250,248,0.96); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a { font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--black); text-decoration: none; font-weight: 400; transition: opacity 0.2s; }
+        .nav-links a:hover { opacity: 0.45; }
+        .nav-collect { padding: 9px 24px; background: var(--black); color: var(--white) !important; transition: opacity 0.2s !important; }
+        .nav-collect:hover { opacity: 0.7 !important; }
+
+        /* Page Hero */
+        .page-hero {
+            padding-top: 140px; padding-bottom: 0;
+            background: var(--black); color: var(--white);
+            text-align: center;
+        }
+        .hero-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(44px, 6vw, 80px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; margin-bottom: 24px; }
+        .hero-subtitle { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 540px; margin: 0 auto 60px; font-weight: 300; line-height: 1.8; }
+
+        /* Cube Gallery Strip */
+        .cube-gallery {
+            display: flex; gap: 3px; overflow-x: auto;
+            scroll-snap-type: x mandatory; scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .cube-gallery::-webkit-scrollbar { display: none; }
+        .cube-gallery img { height: 340px; width: auto; flex-shrink: 0; object-fit: cover; scroll-snap-align: start; display: block; }
+
+        /* Main content */
+        .page-body { display: grid; grid-template-columns: 1fr 480px; gap: 100px; padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+
+        /* Left — about the series */
+        .series-info { }
+        .section-label { display: block; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 20px; }
+        .series-title { font-family: 'Playfair Display', serif; font-size: clamp(30px, 3vw, 44px); font-weight: 300; line-height: 1.18; margin-bottom: 32px; }
+        .series-body p { color: var(--mid-gray); line-height: 1.9; margin-bottom: 20px; }
+        .series-facts { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+        .fact { background: var(--white); padding: 24px 0; }
+        .fact-label { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 8px; }
+        .fact-val { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 300; color: var(--black); }
+
+        .cube-detail-images { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+        .cube-detail-images img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+
+        /* Right — inquiry form */
+        .inquiry-panel {
+            position: sticky; top: 100px; align-self: start;
+            background: var(--black); color: var(--white);
+            padding: 52px 48px;
+        }
+        .panel-eyebrow { font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+        .panel-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 300; line-height: 1.3; margin-bottom: 10px; }
+        .panel-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 40px; }
+
+        .form-group { margin-bottom: 24px; }
+        .form-group label { display: block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 10px; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--white); font-family: 'Inter', sans-serif; font-size: 14px;
+            padding: 14px 16px; outline: none; transition: border-color 0.2s;
+            appearance: none; -webkit-appearance: none;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus { border-color: rgba(255,255,255,0.4); }
+        .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+        .form-group select option { background: #1a1a18; color: var(--white); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .btn-submit {
+            width: 100%; padding: 16px; background: var(--white); color: var(--black);
+            border: none; font-family: 'Inter', sans-serif;
+            font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase;
+            cursor: pointer; margin-top: 8px; transition: opacity 0.2s;
+        }
+        .btn-submit:hover { opacity: 0.85; }
+
+        .panel-note { font-size: 11px; color: rgba(255,255,255,0.28); line-height: 1.7; margin-top: 24px; text-align: center; }
+
+        /* Success state */
+        .form-success { display: none; text-align: center; padding: 40px 0; }
+        .form-success.active { display: block; }
+        .success-icon { font-size: 32px; margin-bottom: 20px; }
+        .success-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 300; margin-bottom: 12px; }
+        .success-text { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+
+        /* Testimonials / past collector notes */
+        .collector-section { background: var(--light-tan); padding: 100px 60px; }
+        .collector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1100px; margin: 48px auto 0; }
+        .collector-quote { }
+        .quote-mark { font-family: 'Playfair Display', serif; font-size: 64px; line-height: 0.6; color: var(--warm-gold); margin-bottom: 20px; display: block; }
+        .quote-text { font-family: 'Playfair Display', serif; font-size: 17px; font-style: italic; font-weight: 300; line-height: 1.7; color: var(--black); margin-bottom: 20px; }
+        .quote-credit { font-size: 10.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid-gray); }
+
+        /* Process */
+        .process-strip { padding: 80px 60px; border-top: 1px solid var(--border); }
+        .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; margin-top: 60px; }
+        .process-step { }
+        .step-num { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 300; color: rgba(0,0,0,0.07); line-height: 1; margin-bottom: 20px; }
+        .step-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 300; margin-bottom: 12px; }
+        .step-text { font-size: 13px; color: var(--mid-gray); line-height: 1.9; }
+
+        /* Footer */
+        footer { background: var(--black); color: var(--white); padding: 72px 60px 0; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; }
+        .footer-brand { }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; }
+        .footer-tagline { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.8; max-width: 240px; }
+        .footer-col h4 { font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bar { background: var(--black); padding: 24px 60px; display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.07); font-size: 11px; color: rgba(255,255,255,0.22); margin-top: 60px; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .page-body { grid-template-columns: 1fr; gap: 0; padding: 60px 24px; }
+            .inquiry-panel { position: static; margin: 0 -24px; padding: 48px 24px; }
+            .series-facts { grid-template-columns: 1fr 1fr; }
+            .cube-detail-images { display: none; }
+            .collector-grid { grid-template-columns: 1fr; gap: 40px; }
+            .process-grid { grid-template-columns: 1fr; gap: 36px; }
+            .form-row { grid-template-columns: 1fr; }
+            .collector-section { padding: 60px 24px; }
+            .process-strip { padding: 60px 24px; }
+            footer { grid-template-columns: 1fr; gap: 36px; padding: 48px 24px 0; }
+            .footer-bar { flex-direction: column; gap: 8px; padding: 20px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="concept-1-gallery-standard.html" class="nav-logo">Katherine Houston</a>
+    <ul class="nav-links">
+        <li><a href="concept-1-gallery-standard.html#works">Works</a></li>
+        <li><a href="concept-1-gallery-standard.html#about">About</a></li>
+        <li><a href="#">Exhibitions</a></li>
+        <li><a href="#">Process</a></li>
+        <li><a href="#" class="nav-collect">Collect</a></li>
+    </ul>
+</nav>
+
+<!-- Hero -->
+<div class="page-hero">
+    <p class="hero-eyebrow">Best Seller · Sculpture Series</p>
+    <h1 class="hero-title">The Cube<br><em>Series</em></h1>
+    <p class="hero-subtitle">Three-dimensional Plexiglas sculptures, each uniquely hand-painted. One-of-a-kind collectible objects that carry the same luminous depth as her paintings — in a form you can hold.</p>
+</div>
+
+<!-- Gallery strip -->
+<div class="cube-gallery" style="background:#0D0D0C; padding-bottom: 0;">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cub-Series.jpg" alt="The Cube Series">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/cubes-in-situ.jpeg" alt="Cubes Installed">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cube-Series-III-2.jpg" alt="Cube Series III">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-for-Dallas-Show-1.jpeg" alt="Cubes, Dallas Show">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-in-profile-II.jpg" alt="Cubes in Profile">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/cube-image-for-website-4.jpeg" alt="Cube Series IV">
+    <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cube-Series-6.jpg" alt="Cube Series VI">
+</div>
+
+<!-- Main body -->
+<div class="page-body">
+
+    <!-- Left: About the series -->
+    <div class="series-info">
+        <span class="section-label">About the Series</span>
+        <h2 class="series-title">Painting,<br>Made <em>Sculptural</em></h2>
+        <div class="series-body">
+            <p>The Cube Series extends Katherine's signature reverse-painting technique into three dimensions. Each cube is built from hand-cut Plexiglas panels that she paints from the back — the same approach she uses for her large-format paintings — then assembled into a precise six-sided form.</p>
+            <p>The result is a sculpture with an inner luminosity you cannot achieve on canvas. Light enters through the transparent acrylic and bounces between the painted surfaces, giving each cube a glow that shifts as you move around it. Displayed individually on a pedestal, arranged in clusters on a shelf, or mounted flush to a wall, they transform any space they occupy.</p>
+            <p>No two cubes are identical. Each face is painted independently, making every cube a genuinely unique object — six abstract paintings assembled into a single three-dimensional work.</p>
+        </div>
+
+        <div class="series-facts">
+            <div class="fact">
+                <div class="fact-label">Medium</div>
+                <div class="fact-val">Reverse-painted Plexiglas</div>
+            </div>
+            <div class="fact">
+                <div class="fact-label">Dimensions</div>
+                <div class="fact-val">6" × 6" × 6" standard</div>
+            </div>
+            <div class="fact">
+                <div class="fact-label">Availability</div>
+                <div class="fact-val">Limited — by inquiry</div>
+            </div>
+            <div class="fact">
+                <div class="fact-label">Edition</div>
+                <div class="fact-val">Each is unique</div>
+            </div>
+        </div>
+
+        <div class="cube-detail-images">
+            <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cube-Series-III-2.jpg" alt="Cube Series III detail">
+            <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-in-profile-II.jpg" alt="Cubes in profile">
+            <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/cube-image-for-website-4.jpeg" alt="Cube detail">
+            <img src="https://katherinehoustonart.com/wp-content/uploads/2022/01/Cubes-for-Dallas-Show-1.jpeg" alt="Cubes at Dallas show">
+        </div>
+    </div>
+
+    <!-- Right: Inquiry form -->
+    <div class="inquiry-panel">
+        <div id="inquiry-form-wrap">
+            <p class="panel-eyebrow">Private Inquiry</p>
+            <h2 class="panel-title">Inquire About<br>the Cube Series</h2>
+            <p class="panel-sub">Katherine responds personally to every inquiry. She'll share availability, current color palette options, and pricing directly.</p>
+
+            <form id="inquiry-form" onsubmit="submitInquiry(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="fname" placeholder="Jane" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lname" placeholder="Smith" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone (optional)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label for="interest">Area of Interest</label>
+                    <select id="interest" name="interest" required>
+                        <option value="" disabled selected>Select one</option>
+                        <option value="single">A single cube for personal collection</option>
+                        <option value="group">A group / curated set</option>
+                        <option value="commission">A commissioned colorway</option>
+                        <option value="gift">A gift for someone</option>
+                        <option value="corporate">Corporate or hospitality acquisition</option>
+                        <option value="general">General information</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell Katherine about your space, your taste, or what draws you to the cubes..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Inquiry</button>
+            </form>
+
+            <p class="panel-note">Your information is never shared. Katherine personally reads every inquiry and typically responds within 48 hours.</p>
+        </div>
+
+        <!-- Success state -->
+        <div class="form-success" id="form-success">
+            <div class="success-icon">✦</div>
+            <h3 class="success-title">Inquiry Received</h3>
+            <p class="success-text">Thank you. Katherine will respond personally within 48 hours with availability, colorway options, and pricing.</p>
+            <br>
+            <p class="success-text" style="color:rgba(255,255,255,0.28); font-size:11px;">A confirmation has been sent to your email.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Collector quotes -->
+<section class="collector-section">
+    <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+        <span class="section-label" style="display:block; margin-bottom:8px;">Collectors</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,40px); font-weight:300;">What people say<br>about living with a Cube</h2>
+    </div>
+    <div class="collector-grid">
+        <div class="collector-quote">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">Every time the light in the room changes, the cube looks completely different. It's like owning six paintings in one object.</p>
+            <p class="quote-credit">— Private collector, Houston TX</p>
+        </div>
+        <div class="collector-quote">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">We have it on a shelf between books. Every guest asks about it. It's the most-discussed thing in our home.</p>
+            <p class="quote-credit">— Interior designer, Dallas TX</p>
+        </div>
+        <div class="collector-quote">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">I bought one as a gift and ended up keeping it. It sits on my desk, and I still find myself looking at it every morning.</p>
+            <p class="quote-credit">— Collector, Chicago IL</p>
+        </div>
+    </div>
+</section>
+
+<!-- How it's made -->
+<section class="process-strip">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <span class="section-label">The Process</span>
+        <h2 style="font-family:'Playfair Display',serif; font-size:clamp(28px,3vw,40px); font-weight:300; max-width:480px; line-height:1.18;">Reverse-painted Plexiglas,<br>assembled by hand</h2>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-num">01</div>
+                <h3 class="step-title">Painting the faces</h3>
+                <p class="step-text">Each face begins as a clear Plexiglas panel. Katherine paints on the back surface using acrylics — the same technique she uses for her large-format paintings. The first mark becomes the outermost visible layer.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">02</div>
+                <h3 class="step-title">Curing and assembly</h3>
+                <p class="step-text">After each panel cures, she assembles all six into a precise cube form. The edges are hand-cut and joined with optical-clarity adhesive, leaving no visible seam.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">03</div>
+                <h3 class="step-title">The living object</h3>
+                <p class="step-text">Because the Plexiglas is optically clear, ambient light enters the cube and interacts with the painted surfaces. The result is a work that looks fundamentally different at dawn, midday, dusk, and under artificial light.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-brand">
+        <div class="footer-logo">Katherine Houston</div>
+        <p class="footer-tagline">Abstract painter working in reverse paint on Plexiglas · Houston, Texas</p>
+    </div>
+    <div class="footer-col">
+        <h4>Works</h4>
+        <ul>
+            <li><a href="#">All Works</a></li>
+            <li><a href="cube-series-inquire-c1.html">Cube Series</a></li>
+            <li><a href="#">Available Works</a></li>
+            <li><a href="#">Archive</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>Artist</h4>
+        <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Process</a></li>
+            <li><a href="#">Exhibitions</a></li>
+            <li><a href="#">Press</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+            <li><a href="mailto:katherineh@usa.net">Email Katherine</a></li>
+            <li><a href="#">Galleries</a></li>
+            <li><a href="https://instagram.com/katherinehoustonart" target="_blank">Instagram</a></li>
+        </ul>
+    </div>
+</footer>
+<div class="footer-bar">
+    <span>© 2026 Katherine Houston. All rights reserved.</span>
+    <span>hhouston / katherine-houston-art</span>
+</div>
+
+<script>
+function submitInquiry(e) {
+    e.preventDefault();
+    var form = document.getElementById('inquiry-form-wrap');
+    var success = document.getElementById('form-success');
+    form.style.opacity = '0';
+    form.style.transition = 'opacity 0.3s';
+    setTimeout(function() {
+        form.style.display = 'none';
+        success.classList.add('active');
+    }, 300);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1749310000-ord01",
+    "createdAt": "2026-06-06T10:00:00.000Z",
+    "buyerName": "Sarah Whitfield",
+    "buyerEmail": "swhitfield@gmail.com",
+    "artworkSlug": "coastal-light-i",
+    "artworkTitle": "Coastal Light I",
+    "amount": 4800,
+    "currency": "USD",
+    "status": "shipped",
+    "stripePaymentIntentId": "pi_test_sample123",
+    "shippingAddress": {
+      "line1": "1402 Seawall Blvd",
+      "city": "Galveston",
+      "state": "TX",
+      "zip": "77550",
+      "country": "US"
+    },
+    "trackingNumber": "1Z999AA1012345678",
+    "trackingCarrier": "UPS",
+    "adminNotes": "Fragile — extra packaging. Notified buyer of tracking."
+  },
+  {
+    "id": "1749050000-ord02",
+    "createdAt": "2026-05-28T14:22:00.000Z",
+    "buyerName": "Jason Park",
+    "buyerEmail": "jpark@collectors.net",
+    "artworkSlug": "infinite-horizon",
+    "artworkTitle": "Infinite Horizon",
+    "amount": 7200,
+    "currency": "USD",
+    "status": "delivered",
+    "stripePaymentIntentId": "pi_test_sample456",
+    "shippingAddress": {
+      "line1": "580 California St",
+      "line2": "Suite 1200",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94104",
+      "country": "US"
+    },
+    "trackingNumber": "9400111899223397670046",
+    "trackingCarrier": "USPS",
+    "adminNotes": "Delivered and confirmed by buyer. Requested certificate of authenticity."
+  }
+]

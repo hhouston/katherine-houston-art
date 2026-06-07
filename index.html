@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katherine Houston Art — Design Concepts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0E0E0C; color: #F0EDE8;
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 60px 40px;
+        }
+        header { text-align: center; margin-bottom: 72px; }
+        .kicker { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(240,237,232,0.4); margin-bottom: 16px; }
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px; font-weight: 300; line-height: 1.1; margin-bottom: 12px;
+        }
+        h1 em { font-style: italic; color: #C9A84C; }
+        .sub { font-size: 13px; color: rgba(240,237,232,0.45); font-weight: 300; }
+
+        .concepts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; width: 100%; }
+
+        .concept {
+            background: #161612; padding: 48px 36px;
+            border: 1px solid rgba(240,237,232,0.06);
+            display: flex; flex-direction: column; gap: 20px;
+            transition: border-color 0.25s;
+        }
+        .concept:hover { border-color: rgba(240,237,232,0.18); }
+
+        .c-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.3); }
+        .c-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px; font-weight: 300; line-height: 1.2;
+        }
+        .c-palette { display: flex; gap: 6px; margin: 4px 0; }
+        .swatch { width: 24px; height: 24px; border-radius: 50%; }
+        .c-desc { font-size: 13px; color: rgba(240,237,232,0.5); line-height: 1.8; font-weight: 300; flex: 1; }
+        .c-inspo { font-size: 11px; color: rgba(240,237,232,0.28); letter-spacing: 0.06em; }
+        .c-link {
+            display: inline-block; padding: 12px 28px;
+            border: 1px solid rgba(240,237,232,0.2); color: rgba(240,237,232,0.7);
+            text-decoration: none; font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; margin-top: 8px;
+            transition: all 0.25s; text-align: center;
+        }
+        .c-link:hover { border-color: #C9A84C; color: #C9A84C; }
+
+        .c1 .c-title { color: #B09070; }
+        .c2 .c-title { color: #C9A84C; }
+        .c3 .c-title { color: #C8A08A; }
+
+        footer-note { display: block; text-align: center; margin-top: 48px; font-size: 11px; color: rgba(240,237,232,0.2); }
+    </style>
+</head>
+<body>
+    <header>
+        <p class="kicker">hhouston / katherine-houston-art · UI Concepts</p>
+        <h1>Katherine <em>Houston</em></h1>
+        <p class="sub">Three design directions for katherinehoustonart.com — choose your favorite to develop further</p>
+    </header>
+
+    <div class="concepts">
+        <div class="concept c1">
+            <span class="c-num">Concept 01</span>
+            <div class="c-title">Gallery Standard</div>
+            <div class="c-palette">
+                <div class="swatch" style="background:#FAFAF8; border: 1px solid rgba(255,255,255,0.2);"></div>
+                <div class="swatch" style="background:#0D0D0C;"></div>
+                <div class="swatch" style="background:#8B7355;"></div>
+                <div class="swatch" style="background:#EAE6DE;"></div>
+            </div>
+            <p class="c-desc">White-cube gallery aesthetic inspired by Gagosian and Pace Gallery. Split-screen hero with studio portrait left, text right. Gallery representation bar for immediate legitimacy signal. Work grid with hover-reveal info. Most institutional and prestigious feel.</p>
+            <p class="c-inspo">Inspired by: Gagosian, White Cube, Pace Gallery</p>
+            <a href="concept-1-gallery-standard.html" class="c-link">Open Concept 1 →</a>
+        </div>
+
+        <div class="concept c2">
+            <span class="c-num">Concept 02</span>
+            <div class="c-title">Immersive Dark</div>
+            <div class="c-palette">
+                <div class="swatch" style="background:#0E0E0C; border: 1px solid rgba(255,255,255,0.15);"></div>
+                <div class="swatch" style="background:#1E1E18;"></div>
+                <div class="swatch" style="background:#C9A84C;"></div>
+                <div class="swatch" style="background:#F0EDE8;"></div>
+            </div>
+            <p class="c-desc">Dark, dramatic, contemporary. Full-width hero with floating artwork panels showing the vibrant abstracts against near-black — they glow. Stats bar, gold accents, "Acquire" language. Process section explains the Plexiglas technique in 3 steps. Collector-oriented.</p>
+            <p class="c-inspo">Inspired by: Anish Kapoor, Olafur Eliasson, contemporary gallery openings</p>
+            <a href="concept-2-immersive-dark.html" class="c-link">Open Concept 2 →</a>
+        </div>
+
+        <div class="concept c3">
+            <span class="c-num">Concept 03</span>
+            <div class="c-title">The Artisan's Story</div>
+            <div class="c-palette">
+                <div class="swatch" style="background:#F5F0E8; border: 1px solid rgba(0,0,0,0.15);"></div>
+                <div class="swatch" style="background:#1E1810;"></div>
+                <div class="swatch" style="background:#8B4513;"></div>
+                <div class="swatch" style="background:#C8B89A;"></div>
+            </div>
+            <p class="c-desc">Warm, editorial, story-driven. Cream tones, personal journey from finance to art, timeline, Instagram feed grid, individual gallery cards. Full process explainer (the Plexiglas technique is a huge differentiator — lean into it). Most conversion-friendly for social traffic.</p>
+            <p class="c-inspo">Inspired by: editorial art blogs, Squarespace fine art portfolios, personal branding</p>
+            <a href="concept-3-artisan-story.html" class="c-link">Open Concept 3 →</a>
+        </div>
+    </div>
+
+    <footer-note>All concepts include: hero with studio shot · video section · gallery credentials · works grid · collect CTA · Instagram link · mobile-responsive</footer-note>
+</body>
+</html>
