@@ -44,7 +44,6 @@ export default function Concept2Works() {
               />
               <div style={{
                 position: 'absolute', inset: 0,
-                background: 'rgba(14,14,12,0)',
                 display: 'flex', flexDirection: 'column',
                 justifyContent: 'flex-end', padding: 20,
                 background: 'linear-gradient(transparent 40%, rgba(14,14,12,0.92))',

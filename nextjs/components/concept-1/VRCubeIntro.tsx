@@ -3,7 +3,7 @@ import { useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
 export function useVRCubeIntro() {
-  const overlayRef = useRef<HTMLDivElement | null>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
   const trigger = useCallback(() => {
@@ -31,7 +31,7 @@ export function useVRCubeIntro() {
   return { overlayRef, trigger }
 }
 
-export function VRCubeOverlay({ overlayRef }: { overlayRef: React.RefObject<HTMLDivElement | null> }) {
+export function VRCubeOverlay({ overlayRef }: { overlayRef: React.RefObject<HTMLDivElement> }) {
   return (
     <>
       <div ref={overlayRef} id="vr-intro" aria-hidden="true" />

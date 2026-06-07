@@ -27,7 +27,7 @@ export const artworks: Artwork[] = [
     price: 3200,
     available: true,
     featured: true,
-    description: 'Houston's skyline distilled to color and light — the moment the city transitions from amber to violet.',
+    description: `Houston's skyline distilled to color and light — the moment the city transitions from amber to violet.`,
   },
   {
     slug: 'infinite-horizon',
@@ -40,7 +40,7 @@ export const artworks: Artwork[] = [
     price: 7200,
     available: false,
     featured: true,
-    description: 'The horizon as a meditation on space and memory. Katherine's largest format to date.',
+    description: `The horizon as a meditation on space and memory. Katherine's largest format to date.`,
   },
   {
     slug: 'tide-pool',
