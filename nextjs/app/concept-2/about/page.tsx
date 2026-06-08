@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'About' }
 
-const PORTRAIT = 'https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston-1024x680.jpg'
+const PORTRAIT = 'https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston.jpg'
 
 export default function Concept2About() {
   return (

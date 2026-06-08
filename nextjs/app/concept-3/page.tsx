@@ -4,7 +4,7 @@ import { featuredArtworks, artworks, pressItems } from '@/lib/data'
 
 export const metadata: Metadata = { title: 'Katherine Houston — The Artisan\'s Story' }
 
-const PORTRAIT = 'https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston-1024x680.jpg'
+const PORTRAIT = 'https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston.jpg'
 const STUDIO = 'https://katherinehoustonart.com/wp-content/uploads/2020/03/katherine-houston-studio.jpg'
 
 export default function Concept3Home() {

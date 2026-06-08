@@ -76,7 +76,7 @@ export default function Concept1Home() {
       <section style={{ padding: '110px 60px', background: '#EAE6DE' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
           <div style={{ position: 'relative' }}>
-            <img src="https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston-1024x680.jpg" alt="Katherine Houston" style={{ width: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston.jpg" alt="Katherine Houston" style={{ width: '100%', objectFit: 'cover', display: 'block' }} />
             <span style={{ position: 'absolute', bottom: -12, right: -12, fontSize: 10, color: '#6B6560', letterSpacing: '0.15em', background: '#EAE6DE', padding: '8px 12px' }}>Houston, Texas · Studio portrait</span>
           </div>
           <div>

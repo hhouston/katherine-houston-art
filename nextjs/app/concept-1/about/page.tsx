@@ -17,7 +17,7 @@ export default function AboutPage() {
     <div style={{ paddingTop: 90, fontFamily: "'Inter', sans-serif" }}>
       {/* Hero */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '60vh' }}>
-        <div style={{ background: "url('https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston-1024x680.jpg') center/cover no-repeat" }} />
+        <div style={{ background: "url('https://katherinehoustonart.com/wp-content/uploads/2020/02/katherine-houston.jpg') center/cover no-repeat" }} />
         <div style={{ padding: '80px 80px 80px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: '#FAFAF8' }}>
           <span style={{ display: 'block', fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#8B7355', marginBottom: 20 }}>The Artist</span>
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px,5vw,64px)', fontWeight: 300, lineHeight: 1.06, color: '#0D0D0C' }}>Katherine<br /><em>Houston</em></h1>
